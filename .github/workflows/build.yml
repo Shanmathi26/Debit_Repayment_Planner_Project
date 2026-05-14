@@ -35,11 +35,13 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: 'fef87ee5-1cdd-4da0-af4b-26eb1398050f-0f776816-8c46-4b78-ad10-aad695291552/reactapp/package-lock.json'
     
     - name: Install dependencies
       run: |
         cd fef87ee5-1cdd-4da0-af4b-26eb1398050f-0f776816-8c46-4b78-ad10-aad695291552/reactapp
-        npm install
+        npm ci
     
     - name: Build React Application
       run: |
