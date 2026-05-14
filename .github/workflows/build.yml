@@ -1,0 +1,47 @@
+name: Build Debt Repayment Planner
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Build Spring Boot Application
+      run: |
+        cd fef87ee5-1cdd-4da0-af4b-26eb1398050f-0f776816-8c46-4b78-ad10-aad695291552/springapp
+        chmod +x mvnw
+        ./mvnw clean compile
+  
+  build-frontend:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: |
+        cd fef87ee5-1cdd-4da0-af4b-26eb1398050f-0f776816-8c46-4b78-ad10-aad695291552/reactapp
+        npm install
+    
+    - name: Build React Application
+      run: |
+        cd fef87ee5-1cdd-4da0-af4b-26eb1398050f-0f776816-8c46-4b78-ad10-aad695291552/reactapp
+        npm run build
